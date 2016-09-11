@@ -1,0 +1,22 @@
+{
+  "name": "divinitor-landing",
+  "authors": [
+    "Vincent Zhang <vincentzhang1996@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "dist"
+  ],
+  "dependencies": {
+    "normalize-css": "^4.2.0"
+  }
+}

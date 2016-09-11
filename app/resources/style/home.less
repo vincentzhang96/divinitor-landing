@@ -1,0 +1,197 @@
+@import "GLAZE.less";
+@import "geomanist.less";
+
+@dv-f-lato: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+@dv-f-geomanist: "Geomanist", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+
+html {
+    background-color: @dv-c-background;
+}
+
+body {
+    font-family: @dv-f-lato;
+    font-size: 14px;
+    color: @dv-c-body;
+    .no-pad;
+    .no-margin;
+}
+
+h1 {
+    font-family: @dv-f-geomanist;
+    color: @dv-c-foreground;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 32px;
+    .no-pad;
+    .no-margin;
+}
+
+h2 {
+    font-family: @dv-f-geomanist;
+    color: @dv-c-foreground;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    font-size: 24px;
+    .no-pad;
+    .no-margin;
+}
+
+h3 {
+    font-family: @dv-f-lato;
+    font-weight: bold;
+    color: @dv-c-accent-2;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-size: 18px;
+    .no-pad;
+    .no-margin;
+}
+
+h4 {
+    font-family: @dv-f-lato;
+    font-weight: bold;
+    color: @dv-c-accent-2;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-size: 16px;
+    .no-pad;
+    .no-margin;
+}
+
+.jumbotron {
+    height: 70vh;
+    width: 100vw;
+    padding: 200px 0 0 0;
+    overflow: hidden;
+
+    .bg-video {
+        z-index: -20;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        video {
+            object-fit: cover;
+            object-position: 62.5% 70%;
+            width: 100%;
+            height: 100%;
+
+            -webkit-animation: fadein 2s;
+            -moz-animation: fadein 2s;
+            -ms-animation: fadein 2s;
+            -o-animation: fadein 2s;
+            animation: fadein 2s;
+
+            @keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+
+            @-moz-keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+
+            @-webkit-keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+
+            @-ms-keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+
+            @-o-keyframes fadein {
+                from { opacity: 0; }
+                to   { opacity: 1; }
+            }
+        }
+    }
+
+    .vignette {
+        z-index: -10;
+        background-image: url("/resources/img/dv-masthead-bg-vignette.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        mix-blend-mode: multiply;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .bg-fadeout {
+        z-index: -10;
+        background: linear-gradient(rgba(19, 19, 21, 0%), rgba(19, 19, 21, 100%));
+        width: 100%;
+        height: 30%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .jumbo-bar {
+        z-index: 0;
+        border-width: 2px 0 2px 0;
+        border-color: @dv-c-foreground;
+        border-style: solid;
+        padding: 12px 0 0 120px;
+        width: 100%;
+        height: 200px;
+        background-color: rgba(0, 0, 0, 0.75);
+        box-sizing: border-box;
+
+        .divinitor-title {
+            h1 {
+                font-size: 36px;
+                margin: 0.1em 0;
+            }
+
+            h3 {
+                color: @dv-c-body;
+                font-weight: normal;
+            }
+
+            .label {
+                color: #646A6E;
+                font-size: 10px;
+                font-family: @dv-f-geomanist;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                margin: 0.875em 0 0 0;
+            }
+        }
+
+        .coming-soon {
+            margin: 1.375em 0 0 0;
+            color: @dv-c-body;
+        }
+    }
+
+    .copyright {
+        color: @dv-c-disabled;
+        font-size: 12px;
+        text-align: right;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 0 20px 10px 0;
+    }
+}
+
+
+.no-pad {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
