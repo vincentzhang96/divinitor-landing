@@ -11,6 +11,8 @@ var paths = {
   styles: "app/resources/style/**/*.{css,less}",
   html: "app/**/*.{htm,html}",
   font: "app/**/*.{eot,ttf,woff,woff2}",
+  video: "app/**/*.{mkv,mp4}",
+  data: "app/**/*.data.*",
   source: "app",
   tmp: ".tmp",
   build: "dist"
@@ -49,15 +51,29 @@ gulp.task('font', function() {
   .pipe(gulp.dest(paths.build));
 })
 
+//  Copy videos to the build directory.
+gulp.task('video', function() {
+  return gulp.src(paths.video)
+  .pipe(gulp.dest(paths.build));
+})
+
+//  Copy data to the build directory.
+gulp.task('data', function() {
+  return gulp.src(paths.data)
+  .pipe(gulp.dest(paths.build));
+})
+
 // Remove the build directory.
 gulp.task('clean', del.bind(null, [ paths.tmp, paths.build ], { dot: true }));
 
 // Watch files for changes and reload the page in the browser when they do.
-gulp.task('watch', [ 'images', 'styles', 'html', 'font' ], function() {
+gulp.task('watch', [ 'images', 'styles', 'html', 'font', 'video', 'data' ], function() {
   browserSync({ notify: false, server: [ paths.tmp, paths.source ] });
   gulp.watch([ paths.html ], [ 'html', browserSync.reload ]);
   gulp.watch([ paths.styles ], [ 'styles', browserSync.reload ]);
   gulp.watch([ paths.font ], [ 'font', browserSync.reload ]);
+  gulp.watch([ paths.video ], [ 'video', browserSync.reload ]);
+  gulp.watch([ paths.data ], [ 'data', browserSync.reload ]);
   gulp.watch([ paths.images ], browserSync.reload);
 });
 
@@ -68,7 +84,7 @@ gulp.task('watch:build', [ 'build' ], function () {
 
 // Build the source.
 gulp.task('build', [ 'clean' ], function (callback) {
-  runSequence([ 'styles', 'templates', 'images' ], callback);
+  runSequence([ 'images', 'styles', 'html', 'font', 'video', 'data' ], callback);
 });
 
 gulp.task('default', [ 'watch' ]);
