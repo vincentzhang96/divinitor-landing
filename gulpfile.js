@@ -31,7 +31,6 @@ gulp.task('styles', function () {
     .pipe(plugins.sourcemaps.init())
     .pipe(plugins.less({ paths: [path.join(__dirname, "app", "resources", "less-incl")] }))
     .pipe(plugins.autoprefixer({ browsers: [ 'ie >= 10', 'android >= 4.1' ] }))
-    .pipe(plugins.sourcemaps.write())
     .pipe(gulp.dest('.tmp'))
     .pipe(plugins.csso())
     .pipe(gulp.dest(paths.build));
