@@ -205,6 +205,26 @@ h4 {
     }
 }
 
+@media screen and (max-width: 600px)
+{
+    .jumbotron {
+
+        .bg-video {
+            background-image: url("/resources/img/dv-masthead-bg-static-merged-tall.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            video {
+                visibility: hidden;
+            }
+        }
+
+        .vignette {
+            visibility: hidden;
+        }
+    }
+
+}
+
 .content {
     position: relative;
     margin-top: 10em;
