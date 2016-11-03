@@ -279,6 +279,47 @@ h4 {
             text-align: right;
             right: 0;
         }
+
+        .navbar {
+
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+
+            h5 {
+                font-family: @dv-f-lato;
+                font-weight: 500;
+                font-size: 14px;
+                color: @dv-c-accent-1;
+                letter-spacing: 0.6em;
+                text-transform: uppercase;
+                margin: 0.25em 0;
+                padding: 0;
+            }
+
+            a {
+                color: @dv-c-idle;
+                transition: color 0.125s ease;
+
+                &:hover {
+                    color: @dv-c-foreground;
+                }
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+                overflow: hidden;
+                margin: 0.5em 0 1em 0;
+            }
+            li {
+                display: inline;
+                &:not(:first-child):before {
+                    content: " | ";
+                    color: @dv-c-disabled;
+                }
+            }
+        }
     }
 
     .item {
