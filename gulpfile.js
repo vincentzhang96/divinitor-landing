@@ -5,6 +5,8 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var path = require('path');
+var ts = require('gulp-typescript');
+var tsProj = ts.createProject("tsconfig.json");
 
 var paths = {
   images: "app/**/*.{png,svg,jpg}",
@@ -13,9 +15,11 @@ var paths = {
   font: "app/**/*.{eot,ttf,woff,woff2}",
   video: "app/**/*.{mkv,mp4}",
   data: "app/**/*.data.*",
+  ts: "app/ts/**/*.ts",
   source: "app",
   tmp: ".tmp",
-  build: "dist"
+  build: "dist",
+  tsOut: "resources/js"
 };
 
 // Optimize images and copy them to the build directory
@@ -62,17 +66,25 @@ gulp.task('data', function() {
   .pipe(gulp.dest(paths.build));
 })
 
+//  Build TypeScript
+gulp.task('tsbuild', function() {
+  let tsResult = tsProj.src()
+    .pipe(tsProj(ts.reporter.defaultReporter()));
+  return tsResult.js.pipe(gulp.dest(path.join(paths.build, paths.tsOut)));
+})
+
 // Remove the build directory.
 gulp.task('clean', del.bind(null, [ paths.tmp, paths.build ], { dot: true }));
 
 // Watch files for changes and reload the page in the browser when they do.
-gulp.task('watch', [ 'images', 'styles', 'html', 'font', 'video', 'data' ], function() {
-  browserSync({ notify: false, server: [ paths.tmp, paths.source ] });
+gulp.task('watch', [ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbuild' ], function() {
+  browserSync({ notify: false, server: [ paths.tmp, paths.build ] });
   gulp.watch([ paths.html ], [ 'html', browserSync.reload ]);
   gulp.watch([ paths.styles ], [ 'styles', browserSync.reload ]);
   gulp.watch([ paths.font ], [ 'font', browserSync.reload ]);
   gulp.watch([ paths.video ], [ 'video', browserSync.reload ]);
   gulp.watch([ paths.data ], [ 'data', browserSync.reload ]);
+  gulp.watch([ paths.ts ], [ 'tsbuild', browserSync.reload ]);
   gulp.watch([ paths.images ], browserSync.reload);
 });
 
@@ -83,7 +95,7 @@ gulp.task('watch:build', [ 'build' ], function () {
 
 // Build the source.
 gulp.task('build', [ 'clean' ], function (callback) {
-  runSequence([ 'images', 'styles', 'html', 'font', 'video', 'data' ], callback);
+  runSequence([ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbuild' ], callback);
 });
 
 gulp.task('default', [ 'watch' ]);
