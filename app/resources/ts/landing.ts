@@ -10,6 +10,8 @@ enum PALADINSStatus {
 var paladinsStatus: PALADINSStatus = PALADINSStatus.CHECKING;
 
 function checkPALADINSStatus(): void {
+    let statusElement: Element = document.getElementById("api-status");
+    statusElement.className = "checking";
     let xhr: XMLHttpRequest = new XMLHttpRequest();
     xhr.onreadystatechange = () => 
     {
@@ -19,11 +21,13 @@ function checkPALADINSStatus(): void {
             {
                 console.log("PALADINS gateway is up");
                 paladinsStatus = PALADINSStatus.UP;
+                statusElement.className = "up";
             }
             else
             {
                 console.log("PALADINS gateway is unreachable");
                 paladinsStatus = PALADINSStatus.DOWN;
+                statusElement.className = "down";
             }
         }
     } 
