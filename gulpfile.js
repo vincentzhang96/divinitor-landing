@@ -17,6 +17,7 @@ var paths = {
   data: "app/**/*.data.*",
   ts: "app/ts/**/*.ts",
   source: "app",
+  vendor: "vendor/**/*",
   tmp: ".tmp",
   build: "dist",
   tsOut: "resources/js"
@@ -73,11 +74,17 @@ gulp.task('tsbuild', function() {
   return tsResult.js.pipe(gulp.dest(path.join(paths.build, paths.tsOut)));
 })
 
+//  Copy vendor stuff
+gulp.task('vendor', function() {
+  return gulp.src(paths.vendor)
+  .pipe(gulp.dest(paths.build));
+});
+
 // Remove the build directory.
 gulp.task('clean', del.bind(null, [ paths.tmp, paths.build ], { dot: true }));
 
 // Watch files for changes and reload the page in the browser when they do.
-gulp.task('watch', [ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbuild' ], function() {
+gulp.task('watch', [ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbuild', 'vendor' ], function() {
   browserSync({ notify: false, server: [ paths.tmp, paths.build ] });
   gulp.watch([ paths.html ], [ 'html', browserSync.reload ]);
   gulp.watch([ paths.styles ], [ 'styles', browserSync.reload ]);
@@ -85,6 +92,7 @@ gulp.task('watch', [ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbui
   gulp.watch([ paths.video ], [ 'video', browserSync.reload ]);
   gulp.watch([ paths.data ], [ 'data', browserSync.reload ]);
   gulp.watch([ paths.ts ], [ 'tsbuild', browserSync.reload ]);
+  gulp.watch([ paths.vendor ], [ 'vendor', browserSync.reload ]);
   gulp.watch([ paths.images ], browserSync.reload);
 });
 
@@ -95,7 +103,7 @@ gulp.task('watch:build', [ 'build' ], function () {
 
 // Build the source.
 gulp.task('build', [ 'clean' ], function (callback) {
-  runSequence([ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbuild' ], callback);
+  runSequence([ 'images', 'styles', 'html', 'font', 'video', 'data', 'tsbuild', 'vendor' ], callback);
 });
 
 gulp.task('default', [ 'watch' ]);

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="https://static.divinitor.com/site/fav/mstile-150x150.png"/>
+            <TileColor>#131315</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
